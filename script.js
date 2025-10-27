@@ -1,32 +1,30 @@
 function checkLogin() {
   var user = document.getElementById("username").value.trim();
   var pass = document.getElementById("password").value.trim();
-  if (user === "k24a1" && pass === "2025") {
-    document.getElementById("login-container").style.display = "none";
-    var videoContainer = document.getElementById("video-container");
-    var video = document.getElementById("myVideo");
-    var playButton = document.getElementById("play-button");
-    var thumbnail = document.getElementById("thumbnail");
 
-    videoContainer.style.display = "flex";
-    video.muted = false;
-    video.volume = 1.0;
+  // ⚡ Bỏ kiểm tra tài khoản mật khẩu — cho phép đăng nhập luôn
+  document.getElementById("login-container").style.display = "none";
+  var videoContainer = document.getElementById("video-container");
+  var video = document.getElementById("myVideo");
+  var playButton = document.getElementById("play-button");
+  var thumbnail = document.getElementById("thumbnail");
 
-    video.play().then(() => {
-      playButton.style.display = "none";
-      thumbnail.style.display = "none";
-    }).catch(() => {
-      playButton.style.display = "block";
-    });
+  videoContainer.style.display = "flex";
+  video.muted = false;
+  video.volume = 1.0;
 
-    if (video.requestFullscreen) video.requestFullscreen();
-    else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+  video.play().then(() => {
+    playButton.style.display = "none";
+    thumbnail.style.display = "none";
+  }).catch(() => {
+    playButton.style.display = "block";
+  });
 
-    video.onplay = () => thumbnail.style.display = "none";
-    video.onended = () => videoContainer.style.display = "none";
-  } else {
-    alert("Sai tài khoản hoặc mật khẩu!");
-  }
+  if (video.requestFullscreen) video.requestFullscreen();
+  else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+
+  video.onplay = () => thumbnail.style.display = "none";
+  video.onended = () => videoContainer.style.display = "none";
 }
 
 function playVideo() {
