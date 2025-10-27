@@ -28,49 +28,37 @@
     </div>
   </div>
 
-  <div id="video-container">
+  <div id="video-container" style="display: none;">
     <img id="thumbnail" src="https://sf-static.upanhlaylink.com/img/image_20251027b5f9b06e0f3c10ab8e6ef34b2cc93ae0.jpg" alt="Thumbnail">
-    <video id="myVideo" playsinline muted autoplay>
+    <video id="myVideo" playsinline muted autoplay loop>
       <source src="doama.mp4" type="video/mp4">
     </video>
     <button id="play-button" onclick="playVideo()">▶ Phát Video</button>
   </div>
 
-  <!-- 🎵 Thêm nhạc nền -->
-  <audio id="bg-music" loop>
+  <!-- 🎵 Nhạc nền tự động -->
+  <audio id="bg-music" autoplay loop>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // Khi người dùng click lần đầu (vd: nhấn nút đăng nhập, hoặc bất kỳ đâu)
-    window.addEventListener("click", function playMusic() {
+    // Cố gắng phát nhạc tự động khi vào trang
+    window.addEventListener("load", () => {
       const music = document.getElementById("bg-music");
-      music.play().catch(() => {});
-      window.removeEventListener("click", playMusic);
+      const tryPlay = () => {
+        music.play().catch(() => {});
+        document.removeEventListener("click", tryPlay);
+      };
+
+      // Thử phát nhạc ngay
+      music.play().catch(() => {
+        // Nếu bị chặn, chờ click bất kỳ để bật
+        document.addEventListener("click", tryPlay);
+      });
     });
-
-    // Hàm kiểm tra đăng nhập
-    function checkLogin() {
-      var user = document.getElementById("username").value.trim();
-      var pass = document.getElementById("password").value.trim();
-
-      if (user === "k24a1" && pass === "2025") {
-        document.getElementById("login-container").style.display = "none";
-        var videoContainer = document.getElementById("video-container");
-        videoContainer.style.display = "block";
-
-        const video = document.getElementById("myVideo");
-        video.play();
-      } else {
-        alert("Sai thông tin đăng nhập!");
-      }
-    }
-
-    // Phát video khi nhấn nút
-    function playVideo() {
-      const video = document.getElementById("myVideo");
-      video.play();
-    }
   </script>
+
+  <!-- Giữ nguyên file script chính -->
+  <script src="script.js"></script>
 </body>
 </html>
