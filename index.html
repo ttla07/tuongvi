@@ -19,7 +19,7 @@
   <div id="login-container">
     <div id="login-form">
       <a href="https://www.facebook.com/angtuongvi.540608" target="_blank">
-              <img src="https://sf-static.upanhlaylink.com/img/image_20251027b5f9b06e0f3c10ab8e6ef34b2cc93ae0.jpg" alt="Avatar" class="avatar" title="tvii">
+        <img src="https://sf-static.upanhlaylink.com/img/image_20251027b5f9b06e0f3c10ab8e6ef34b2cc93ae0.jpg" alt="Avatar" class="avatar" title="tvii">
       </a>
       <h2 class="neon-text">Tuong Vi</h2>
       <input type="text" id="username" placeholder="Tên đăng nhập"><br>
@@ -36,13 +36,41 @@
     <button id="play-button" onclick="playVideo()">▶ Phát Video</button>
   </div>
 
-  <script src="script.js"></script>
+  <!-- 🎵 Thêm nhạc nền -->
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Khi người dùng click lần đầu (vd: nhấn nút đăng nhập, hoặc bất kỳ đâu)
+    window.addEventListener("click", function playMusic() {
+      const music = document.getElementById("bg-music");
+      music.play().catch(() => {});
+      window.removeEventListener("click", playMusic);
+    });
+
+    // Hàm kiểm tra đăng nhập
+    function checkLogin() {
+      var user = document.getElementById("username").value.trim();
+      var pass = document.getElementById("password").value.trim();
+
+      if (user === "k24a1" && pass === "2025") {
+        document.getElementById("login-container").style.display = "none";
+        var videoContainer = document.getElementById("video-container");
+        videoContainer.style.display = "block";
+
+        const video = document.getElementById("myVideo");
+        video.play();
+      } else {
+        alert("Sai thông tin đăng nhập!");
+      }
+    }
+
+    // Phát video khi nhấn nút
+    function playVideo() {
+      const video = document.getElementById("myVideo");
+      video.play();
+    }
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
