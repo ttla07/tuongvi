@@ -1,2 +1,0 @@
-# tuongvi
-Chuc ngụ ngon
